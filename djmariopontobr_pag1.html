@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> djmariosouza.com.br | DJ Mário Souza</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            background: linear-gradient(135deg, #0f3460 0%, #1e5799 25%, #2989d8 50%, #4db5ff 75%, #87ceeb 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Floating Music Elements */
+        .music-element {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: float 8s ease-in-out infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+        .music-element:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .music-element:nth-child(2) { top: 20%; right: 10%; animation-delay: 2s; }
+        .music-element:nth-child(3) { bottom: 30%; left: 8%; animation-delay: 4s; }
+        .music-element:nth-child(4) { top: 60%; right: 15%; animation-delay: 6s; }
+        .music-element:nth-child(5) { bottom: 10%; right: 20%; animation-delay: 1s; }
+        .music-element:nth-child(6) { top: 40%; left: 3%; animation-delay: 3s; }
+        .music-element:nth-child(7) { bottom: 60%; right: 5%; animation-delay: 5s; }
+        .music-element:nth-child(8) { top: 80%; left: 15%; animation-delay: 7s; }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+            flex-grow: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Header simplificado para Linktree */
+        .header {
+            background: rgba(15, 52, 96, 0.9);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border-radius: 30px;
+            padding: 2.5rem 2rem;
+            margin-bottom: 2rem;
+            animation: slideDown 0.8s ease-out;
+            position: relative;
+            z-index: 10;
+            border: 2px solid rgba(77, 181, 255, 0.3);
+            width: 100%;
+            max-width: 450px;
+            margin-top: 0;
+        }
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .profile-section {
+            text-align: center;
+        }
+        .profile-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid #4db5ff;
+            box-shadow: 0 0 30px rgba(77, 181, 255, 0.5), 0 0 60px rgba(30, 87, 153, 0.3);
+            transition: all 0.3s ease;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(77, 181, 255, 0.5), 0 0 60px rgba(30, 87, 153, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(77, 181, 255, 0.8), 0 0 80px rgba(30, 87, 153, 0.6); }
+        }
+        .profile-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px rgba(77, 181, 255, 0.8), 0 0 100px rgba(30, 87, 153, 0.6);
+        }
+        .verified-badge {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 25px;
+            height: 25px;
+            z-index: 5;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        .profile-name {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #4db5ff, #2989d8, #1e5799, #87ceeb);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientText 3s ease infinite;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        @keyframes gradientText {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .profile-title {
+            font-size: 1.2rem;
+            color: #87ceeb;
+            font-weight: 400;
+            text-shadow: 0 0 8px rgba(135, 206, 235, 0.5);
+        }
+
+        /* Seção de Links (botões) */
+        .links-section {
+            width: 100%;
+            max-width: 450px;
+            background: rgba(15, 52, 96, 0.9);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: fadeInUp 0.8s ease-out 0.5s both;
+            position: relative;
+            z-index: 10;
+            border: 2px solid rgba(77, 181, 255, 0.3);
+            margin-bottom: 2rem;
+        }
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .link-button {
+            display: block;
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 1.2rem;
+            background: linear-gradient(45deg, #1e5799, #2989d8);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(30, 87, 153, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(77, 181, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .link-button:last-child {
+            margin-bottom: 0;
+        }
+        .link-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(30, 87, 153, 0.5);
+            background: linear-gradient(45deg, #2989d8, #1e5799);
+        }
+        .link-button:active {
+            transform: translateY(-2px);
+        }
+        .link-button img {
+            margin-right: 10px;
+        }
+        
+        /* Rodapé */
+        .footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 1.5rem 0;
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 450px;
+        }
+        .social-icons {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .social-icons a {
+            color: white;
+            font-size: 1.8rem;
+            transition: transform 0.3s ease;
+        }
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .profile-name {
+                font-size: 2rem;
+            }
+            .profile-title {
+                font-size: 1rem;
+            }
+            .link-button {
+                padding: 1rem;
+                font-size: 1rem;
+            }
+            .header, .links-section, .footer {
+                max-width: 90%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .music-element {
+                font-size: 1.5rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .profile-image {
+                width: 120px;
+                height: 120px;
+            }
+            .verified-badge {
+                width: 20px;
+                height: 20px;
+            }
+            .profile-name {
+                font-size: 1.8rem;
+            }
+            .profile-title {
+                font-size: 0.9rem;
+            }
+            .link-button {
+                padding: 0.8rem;
+            }
+            .music-element {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="music-element">🎤</div>
+    <div class="music-element">🎵</div>
+    <div class="music-element">🎶</div>
+    <div class="music-element">🎧</div>
+    <div class="music-element">🎼</div>
+    <div class="music-element">🎤</div>
+    <div class="music-element">🎵</div>
+    <div class="music-element">🎶</div>
+
+    <div class="container">
+        <header class="header">
+            <div class="profile-section">
+                <div class="profile-wrapper">
+                    <img src="https://i.postimg.cc/mDjZyHk1/IMG-20250715-WA0010.jpg" alt="DJ Mário Souza" class="profile-image">
+                    <img src="https://img.icons8.com/color/48/instagram-verification-badge.png" alt="Verificado" class="verified-badge">
+                </div>
+                <h1 class="profile-name">DJ Mário Souza</h1>
+                <p class="profile-title">Especialista em Festas de Casamento e 15 anos</p>
+            </div>
+        </header>
+
+        <main class="links-section">
+            <a href="https://wa.me/5584998939374?text=Oi%2C%20M%C3%A1rio%21%20Vi%20seu%20site%20e%20queria%20agendar%20uma%20festa%20de" target="_blank" class="link-button">
+                💬 Agende comigo a sua festa
+            </a>
+            <a href="LINK_LandingPage" target="_blank" class="link-button">
+                ✅ Assinar Close Friends VIP + E-book
+            </a>
+            <a href="https://youtube.com/@djmariosouza" target="_blank" class="link-button">
+                ▶️ Meu canal no YouTube
+            </a>
+            <a href="https://instagram.com/djmariosouza" target="_blank" class="link-button">
+                📸 Meu Instagram
+            </a>
+            <a href="mailto:marionatal@bol.com.br" class="link-button">
+                📧 Meu E-mail
+            </a>
+        </main>
+
+        <footer class="footer">
+            <p>© 2025 DJ Mário Souza. Todos os direitos reservados.</p>
+            <p>🎵 Tornando cada evento único e inesquecível há mais de 10 anos</p>
+            <p> 🎧 - 🎚️ - 🎙️ - 🔊  - 🎛️  - 🎉 - 🕺 - 🎂 </p>
+            <p> Me acompanhe nas redes: </p>
+            <div class="social-icons">
+                <a href="https://instagram.com/djmariosouza" target="_blank" title="Instagram">
+                    <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram" width="30" height="30" />
+                </a>
+                <a href="https://www.youtube.com/@djmariosouza" target="_blank" title="YouTube">
+                    <img src="https://img.icons8.com/ios-filled/50/ffffff/youtube-play.png" alt="YouTube" width="30" height="30" />
+                </a>
+                <a href="https://wa.me/5584998939374?text=Oi%2C%20M%C3%A1rio%21%20Vi%20seu%20site%20e%20queria%20agendar%20uma%20festa%20de" target="_blank" title="WhatsApp">
+                    <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp" width="30" height="30" />
+                </a>
+            </div>
+        </footer>
+    </div>
+    <script>
+        // Music visualization effect
+        const musicElements = document.querySelectorAll('.music-element');
+        setInterval(() => {
+            musicElements.forEach(element => {
+                const randomScale = 0.8 + Math.random() * 0.4;
+                element.style.transform = `scale(${randomScale})`;
+            });
+        }, 800);
+    </script>
+</body>
+</html>
